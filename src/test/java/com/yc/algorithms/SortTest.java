@@ -7,15 +7,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 @DisplayName("Sort Algorithm Tests")
-class SortTest {
+public class SortTest {
 
     @Nested
-    @DisplayName("Bubble Sort Tests")
-    class BubbleSortTests {
+    public class BubbleSortTests {
 
         @Test
-        @DisplayName("Bubble Sort 1")
-        void testBubbleSort1() {
+        @DisplayName("Test with five element array")
+        public void testWithFiveElementArray() {
             int[] arr = {15, 6, 2, 12, 4};
             Sort.bubbleSort(arr);
             int[] sorted = {2, 4, 6, 12, 15};
@@ -23,8 +22,8 @@ class SortTest {
         }
 
         @Test
-        @DisplayName("Bubble Sort 2")
-        void testBubbleSort2() {
+        @DisplayName("Test with empty array")
+        public void testWithEmptyArray() {
             int[] arr = {};
             Sort.bubbleSort(arr);
             int[] sorted = {};
@@ -33,17 +32,15 @@ class SortTest {
     }
 
     @Nested
-    @DisplayName("Selection Sort Tests")
-    class SelectionSortTests {
+    public class SelectionSortTests {
 
         @Test
-        @DisplayName("Selection Sort 1")
-        void testSelectionSort1() {
+        @DisplayName("Test with seven element array")
+        public void testWithSevenElementArray() {
             int[] arr = {7, 2, 4, 21, 25, 10, 17};
             Sort.selectionSort(arr);
             int[] sorted = {2, 4, 7, 10, 17, 21, 25};
             assertArrayEquals(sorted, arr);
         }
     }
-
 }
