@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArrayStackTest {
 
     @Test
+    @DisplayName("Initialization")
     public void testStackInitialization() {
         ArrayStack stack = new ArrayStack();
 
@@ -16,8 +17,9 @@ public class ArrayStackTest {
     }
 
     @Test
+    @DisplayName("Add single item to one array stack")
     public void testAdd() {
-        ArrayStack stack = new ArrayStack();
+        ArrayStack stack = new ArrayStack(1);
         Object item = new Object();
 
         assertTrue(stack.push(item));
@@ -26,8 +28,31 @@ public class ArrayStackTest {
     }
 
     @Test
+    @DisplayName("Adding null value")
+    public void testAddNullValue() {
+        ArrayStack stack = new ArrayStack(1);
+
+        Exception thrown = assertThrows(IllegalArgumentException.class,
+                () -> stack.push(null));
+        assertTrue(thrown.getMessage().contains("Cannot enter null value"));
+    }
+
+    @Test
+    @DisplayName("Adding more than stack size")
+    public void testAddMoreThanStackSize() {
+        ArrayStack stack = new ArrayStack(1);
+        Object item1 = new Object();
+        Object item2 = new Object();
+
+        assertTrue(stack.push(item1));
+        assertFalse(stack.push(item2));
+        assertNotNull(stack);
+        assertTrue(stack.isFull());
+    }
+
+    @Test
     public void testPeek() {
-        ArrayStack stack = new ArrayStack();
+        ArrayStack stack = new ArrayStack(1);
         Object item = new Object();
         stack.push(item);
 
@@ -37,7 +62,7 @@ public class ArrayStackTest {
 
     @Test
     public void testPop() {
-        ArrayStack stack = new ArrayStack();
+        ArrayStack stack = new ArrayStack(1);
         Object item = new Object();
         stack.push(item);
 

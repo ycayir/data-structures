@@ -10,7 +10,12 @@ public class ArrayStack implements Stack {
 
     public ArrayStack() {
         this.items = new Object[DEFAULT_SIZE];
-        this.top = 0;
+        this.top = -1;
+    }
+
+    public ArrayStack(int maxSize) {
+        this.items = new Object[maxSize];
+        this.top = -1;
     }
 
     @Override
@@ -19,23 +24,23 @@ public class ArrayStack implements Stack {
             throw new IllegalArgumentException("Cannot enter null value");
         }
         if (isFull()) {
-            throw new IllegalArgumentException("Stack is already full");
+            return false;
         }
 
-        items[top+1] = o;
         top++;
+        items[top] = o;
         return true;
     }
 
     @Override
     public Object pop() {
         if (isEmpty()) {
-            throw new EmptyStackException();
+            return null;
         }
-        Object toBeRemoved = items[top];
+        Object removed = items[top];
         items[top] = null;
         top--;
-        return toBeRemoved;
+        return removed;
     }
 
     @Override
@@ -48,12 +53,26 @@ public class ArrayStack implements Stack {
 
     @Override
     public boolean isEmpty() {
-        return top == 0;
+        return top == -1;
     }
 
     @Override
     public boolean isFull() {
-        return items.length == top+1;
+        return items.length - 1 == top;
+    }
+
+    @Override
+    public String toString() {
+        String str = "{";
+        for (int i=top; i>=0; i--) {
+            str += items[i].toString();
+            if (i > 0) {
+                str += ", ";
+            }
+        }
+        str += "}";
+
+        return str;
     }
 
 }
