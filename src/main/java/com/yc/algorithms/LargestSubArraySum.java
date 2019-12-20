@@ -18,20 +18,38 @@ public class LargestSubArraySum {
      * @return  The sum of the maximum sub array
      */
     public static int maxSumContiguousSubArray(int[] arr) {
-        int max_so_far = Integer.MIN_VALUE;
-        int temp_sum = 0;
+        int best_sum = Integer.MIN_VALUE;
+        int current_sum = 0;
 
         for (int i=0; i<arr.length; i++) {
-            temp_sum = temp_sum + arr[i];
-            if (max_so_far < temp_sum) {
-                max_so_far = temp_sum;
+            current_sum = current_sum + arr[i];
+            if (best_sum < current_sum) {
+                best_sum = current_sum;
             }
-            if (temp_sum < 0) {
-                temp_sum = 0;
+            if (current_sum < 0) {
+                current_sum = 0;
             }
         }
 
-        return max_so_far;
+        return best_sum;
+    }
+
+    /**
+     * This is Jay Kadane's algorithm using <code>Math</code> library
+     * This version returns 0 if the input contains no positive elements
+     * @param   arr Given array
+     * @return  The sum of the maximum sub array
+     */
+    public static int maxSumContiguousSubArrayOptimized1(int[] arr) {
+        int best_sum = 0;
+        int current_sum = 0;
+
+        for (int i=1; i<arr.length; i++) {
+            current_sum = Math.max(0, current_sum + arr[i]);
+            best_sum = Math.max(best_sum, current_sum);
+        }
+
+        return best_sum;
     }
 
     /**
@@ -39,42 +57,73 @@ public class LargestSubArraySum {
      * @param   arr Given array
      * @return  The sum of the maximum sub array
      */
-    public static int maxSumContiguousSubArrayOptimized(int[] arr) {
-        int max_so_far = arr[0];
-        int temp_sum = arr[0];
+    public static int maxSumContiguousSubArrayOptimized2(int[] arr) {
+        int best_sum = arr[0];
+        int current_sum = arr[0];
 
         for (int i=1; i<arr.length; i++) {
-            temp_sum = Math.max(arr[i], temp_sum + arr[i]);
-            max_so_far = Math.max(max_so_far, temp_sum);
+            current_sum = Math.max(arr[i], current_sum + arr[i]);
+            best_sum = Math.max(best_sum, current_sum);
         }
 
-        return max_so_far;
+        return best_sum;
     }
 
-    public static int maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes(int[] arr) {
-        int max_so_far = Integer.MIN_VALUE;
-        int max_ending_here = 0;
+    /**
+     * Not Yet Implemented!
+     *
+     * <p> See Kadane's second algorithm at
+     * <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem"
+     * </p>
+     *
+     * @param arr
+     * @return
+     */
+    public static int maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes1(int[] arr) {
+//        int best_sum = 0;
+//        int current_sum = 0;
+//        int best_start = 0, best_end = 0, current_start = 0;
+//
+//        for (int i=0; i<arr.length; i++) {
+//            int current_start;
+//            int current_end;
+//            if (current_sum <= 0) {
+//                current_start = curent
+//            }
+//        }
+//
+//        System.out.println("Max contiguous sum is " + best_sum);
+//        System.out.println("Starting index " + best_start);
+//        System.out.println("Ending index " + best_end);
+//
+//        return best_sum;
+        return 0;
+    }
+
+    public static int maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes2(int[] arr) {
+        int best_sum = Integer.MIN_VALUE;
+        int current_sum = 0;
         int start = 0, end = 0, s = 0;
 
         for (int i=0; i<arr.length; i++) {
-            max_ending_here += arr[i];
+            current_sum += arr[i];
 
-            if (max_so_far < max_ending_here) {
-                max_so_far = max_ending_here;
+            if (best_sum < current_sum) {
+                best_sum = current_sum;
                 start = s;
                 end = i;
             }
 
-            if (max_ending_here < 0) {
-                max_ending_here = 0;
+            if (current_sum < 0) {
+                current_sum = 0;
                 s = i + 1;
             }
         }
 
-        System.out.println("Max contiguous sum is " + max_so_far);
+        System.out.println("Max contiguous sum is " + best_sum);
         System.out.println("Starting index " + start);
         System.out.println("Ending index " + end);
 
-        return max_so_far;
+        return best_sum;
     }
 }

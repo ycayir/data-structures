@@ -20,18 +20,36 @@ public class LargestSubArraySumTest {
 
     @Test
     @DisplayName("Optimized solution for {-2, -3, 4, -1, -2, 1, 5, -3}")
-    public void testFindLargestSubArrayOptimized() {
+    public void testFindLargestSubArrayOptimized1() {
         int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
-        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayOptimized(arr);
+        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayOptimized1(arr);
+
+        assertEquals(7, largestSum);
+    }
+
+    @Test
+    @DisplayName("Optimized solution for {-2, -3, 4, -1, -2, 1, 5, -3}")
+    public void testFindLargestSubArrayOptimized2() {
+        int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
+        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayOptimized2(arr);
 
         assertEquals(7, largestSum);
     }
 
     @Test
     @DisplayName("Maintaining sub array indexes solution for {-2, -3, 4, -1, -2, 1, 5, -3}")
-    public void testFindLargestSubArrayMaintainingStartAndEnd() {
+    public void testFindLargestSubArrayMaintainingStartAndEndIndexes1() {
+//        int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
+//        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes1(arr);
+//
+//        assertEquals(7, largestSum);
+    }
+
+    @Test
+    @DisplayName("Maintaining sub array indexes solution for {-2, -3, 4, -1, -2, 1, 5, -3}")
+    public void testFindLargestSubArrayMaintainingStartAndEndIndexes2() {
         int[] arr = {-2, -3, 4, -1, -2, 1, 5, -3};
-        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes(arr);
+        int largestSum = LargestSubArraySum.maxSumContiguousSubArrayMaintainingSubArrayStartEndIndexes2(arr);
 
         assertEquals(7, largestSum);
     }
