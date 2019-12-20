@@ -12,6 +12,11 @@ package com.yc.algorithms;
  */
 public class LargestSubArraySum {
 
+    /**
+     * This is Jay Kadane's algorithm
+     * @param   arr Given array
+     * @return  The sum of the maximum sub array
+     */
     public static int maxSumContiguousSubArray(int[] arr) {
         int max_so_far = Integer.MIN_VALUE;
         int temp_sum = 0;
@@ -29,6 +34,11 @@ public class LargestSubArraySum {
         return max_so_far;
     }
 
+    /**
+     * This is Jay Kadane's algorithm using <code>Math</code> library
+     * @param   arr Given array
+     * @return  The sum of the maximum sub array
+     */
     public static int maxSumContiguousSubArrayOptimized(int[] arr) {
         int max_so_far = arr[0];
         int temp_sum = arr[0];
