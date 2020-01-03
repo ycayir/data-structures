@@ -15,13 +15,17 @@ import java.util.Map;
  *   sales.tab = A list of product names tab delimited with sales amount
  *
  * From this data we'd like you to answer two questions:
- * What category has the highest average sales price? (Please include the average sale price)
- * What is the minimum and maximum sale in the category 'Breakfast'
- * This comes from when someone worked at a company that made back office software for restaurants.  You can imagine the second file is a Point of Sale record for the day.
+ *  1) What category has the highest average sales price? (Please include the average sale price)
+ *  2) What is the minimum and maximum sale in the category 'Breakfast'
  *
- * Please email the code in a zip file in approximately one hour, along with the answers. If you have trouble emailing us the code, please send us a private gist (gist.github.com).
+ * This comes from when someone worked at a company that made back office software for restaurants.
+ * You can imagine the second file is a Point of Sale record for the day.
  *
- * P.S. - We've had people install MySQL, import the data and provide the answer by executing queries.  While that is a good approach, we'd rather see everything done within a self-contained, simple program.
+ * Please email the code in a zip file in approximately one hour, along with the answers.
+ * If you have trouble emailing us the code, please send us a private gist (gist.github.com).
+ *
+ * P.S. - We've had people install MySQL, import the data and provide the answer by executing queries.
+ * While that is a good approach, we'd rather see everything done within a self-contained, simple program.
  *
  * P.P.S - You can do this in any language.
  *
