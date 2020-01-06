@@ -1,5 +1,11 @@
 package com.yc.interviews.draftkings;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * Here is the coding exercise from DraftKings, submitted on 03 January 2020
  *
@@ -71,5 +77,87 @@ package com.yc.interviews.draftkings;
  * Feel free to add any other class members or other classes, as needed.
  */
 public class OrgChart {
+
+    private class Node {
+        private String id;
+        private String name;
+        private List<Node> children = new ArrayList<>();
+
+        Node(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        List<Node> getChildren() {
+            return children;
+        }
+    }
+
+    private Node root = null;
+
+    public void add(String id, String name, String managerId) {
+        System.out.println("Adding emp ID: " + id + " name: " + name + " manager id: " + managerId);
+        Node newEmployee = new Node(id, name);
+
+    }
+
+    public void move(String employeeId, String newManagerId) {
+
+    }
+
+    public void remove(String employeeId) {
+
+    }
+
+    public void print() {
+        print(root);
+    }
+
+    private void print(Node root) {
+        if (root == null) {
+
+        }
+//        System.out.println(root.name + " [" + root.id + "]");
+//        root.getChildren().forEach(Node -> );
+    }
+
+    public static void main(String[] args) {
+        try {
+            OrgChart orgChart = new OrgChart();
+
+            Scanner scanner = new Scanner(new File("src/main/resources/draftkings/employees1.csv"));
+            int numberOfLines = scanner.nextInt();
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(",");
+
+                if ("add".equalsIgnoreCase(data[0])) {
+                    if (data.length != 4) {
+                        throw new IllegalArgumentException("Add operation should be 4 arguments but has " + data.length);
+                    }
+                    orgChart.add(data[1], data[2], data[3]);
+                } else if ("move".equalsIgnoreCase(data[0])) {
+                    if (data.length != 3) {
+                        throw new IllegalArgumentException("Move operation should be 3 arguments but has " + data.length);
+                    }
+                    orgChart.move(data[1], data[2]);
+                } else if ("remove".equalsIgnoreCase(data[0])) {
+                    if (data.length != 2) {
+                        throw new IllegalArgumentException("Delete operation should be 2 arguments but has " + data.length);
+                    }
+                    orgChart.remove(data[1]);
+                } else if ("print".equalsIgnoreCase(data[0])) {
+                    if (data.length != 1) {
+                        throw new IllegalArgumentException("Print operation should be 1 arguments but has " + data.length);
+                    }
+                    orgChart.print();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
 }

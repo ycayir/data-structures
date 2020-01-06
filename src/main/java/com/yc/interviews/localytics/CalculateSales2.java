@@ -31,8 +31,8 @@ import java.util.Scanner;
  *
  */
 public class CalculateSales2 {
-    private static String PATH_TO_PRODUCTS = "src/main/resources/products.tab";
-    private static String PATH_TO_SALES = "src/main/resources/sales.tab";
+    private static String PATH_TO_PRODUCTS = "src/main/resources/localytics/products.tab";
+    private static String PATH_TO_SALES = "src/main/resources/localytics/sales.tab";
 
     private static Map<String, String> getProductsToCategories() {
         Map<String, String> productsToCategories = new HashMap<>();
