@@ -88,17 +88,81 @@ public class OrgChart {
             this.name = name;
         }
 
-        List<Node> getChildren() {
+        private String getId() {
+            return id;
+        }
+
+        private void setId(String id) {
+            this.id = id;
+        }
+
+        private String getName() {
+            return name;
+        }
+
+        private void setName(String name) {
+            this.name = name;
+        }
+
+        private List<Node> getChildren() {
             return children;
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Node id: ").append(id).append(" name: ").append(name);
+
+            return sb.toString();
         }
     }
 
-    private Node root = null;
+    private Node root = new Node("", "");
 
     public void add(String id, String name, String managerId) {
-        System.out.println("Adding emp ID: " + id + " name: " + name + " manager id: " + managerId);
-        Node newEmployee = new Node(id, name);
+        System.out.println("    Adding emp ID: " + id + " name: " + name + " manager id: " + managerId);
+        Node node = getNode(id);
+        if (node == null) {    // ID does not exist in the org chart
+            Node newEmployee = new Node(id, name);
+            if (managerId.equalsIgnoreCase("-1")) {
+                System.out.println("Adding " + newEmployee.getId() + " to root");
+                root.getChildren().add(newEmployee);
+            } else {
+                System.out.println("Manager id: " + managerId);
+                Node manager = getNode(managerId);
+                if (manager != null) {
+                    System.out.println("Adding " + newEmployee.getId() + " to manager " + manager.getId());
+                    manager.getChildren().add(newEmployee);
+                } else {
+                    System.out.println("Manager not found " + managerId);
+                }
+            }
+        }
+    }
 
+    private Node getNode(String id) {
+        Node node = getNode(root, id);
+//        System.out.println("Returned: " + node);
+        return node;
+    }
+
+    private Node getNode(Node node, String id) {
+//        if (id == null) {
+//            return null;
+//            throw new IllegalArgumentException("Node and employee ID cannot be null");
+//        }
+
+        if (id.equalsIgnoreCase(node.getId())) {
+            System.out.println("Returning: " + node);
+            return node;
+        } else {
+            for (Node n : node.getChildren()) {
+                System.out.println("Parent: " + node.getId() + " child -> " + n);
+                return getNode(n, id);
+            }
+//            node.getChildren().forEach(each -> getNode(each, id));
+        }
+
+        return null;
     }
 
     public void move(String employeeId, String newManagerId) {
@@ -113,12 +177,18 @@ public class OrgChart {
         print(root);
     }
 
-    private void print(Node root) {
-        if (root == null) {
-
+    private void print(Node node) {
+        if ("".equals(node.getId())) {
+            for (Node n : node.getChildren()) {
+                print(n);
+            }
         }
-//        System.out.println(root.name + " [" + root.id + "]");
-//        root.getChildren().forEach(Node -> );
+
+        System.out.println(node.name + " [" + node.id + "]");
+        for (Node n : node.getChildren()) {
+            print(n);
+        }
+//            root.getChildren().forEach(this::print);
     }
 
     public static void main(String[] args) {
