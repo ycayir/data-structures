@@ -21,6 +21,7 @@ public class Expression {
             }
 
             if (closingParanthesis == c) {
+                if (stack.isEmpty()) return false;
                 stack.pop();
             }
         }
